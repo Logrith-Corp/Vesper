@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy — Vesper</title>
+<link rel="stylesheet" href="../css/theme.css"/>
+<style>
+.privacy-hero { padding: 100px 56px 80px; background: var(--black); position: relative; overflow: hidden; text-align: center; }
+.privacy-hero-bg { position: absolute; font-family: var(--font-d); font-weight: 800; font-size: clamp(80px,15vw,240px); letter-spacing: -.03em; color: rgba(255,255,255,.025); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; }
+.privacy-hero-title { font-family: var(--font-d); font-weight: 700; font-size: clamp(48px,7vw,96px); letter-spacing: -.03em; line-height: 1.02; margin-bottom: 24px; position: relative; z-index: 2; }
+.privacy-hero-title em { font-style: italic; font-weight: 300; color: var(--grey-4); }
+.privacy-hero-sub { font-size: 17px; color: var(--grey-4); line-height: 1.8; max-width: 540px; margin: 0 auto 48px; position: relative; z-index: 2; }
+
+/* MANIFESTO */
+.manifesto { background: var(--grey-1); padding: 100px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.manifesto-label { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--grey-3); margin-bottom: 20px; }
+.manifesto-text { font-family: var(--font-d); font-size: clamp(24px,2.8vw,38px); font-weight: 400; line-height: 1.5; letter-spacing: -.01em; }
+.manifesto-text strong { color: var(--white); }
+.manifesto-right { display: flex; flex-direction: column; gap: 32px; padding-top: 8px; }
+.manifesto-point { border-left: 1px solid rgba(255,255,255,.08); padding-left: 24px; }
+.manifesto-point h4 { font-family: var(--font-d); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.manifesto-point p  { font-size: 14px; color: var(--grey-4); line-height: 1.75; }
+
+/* ARCHITECTURE */
+.arch-section { background: var(--black); padding: 100px 56px; }
+.arch-diagram { margin-top: 60px; border: 1px solid rgba(255,255,255,.06); border-radius: 20px; padding: 60px; background: var(--grey-1); }
+.arch-layers { display: flex; flex-direction: column; gap: 12px; }
+.arch-layer { background: var(--black); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: 24px 32px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: center; transition: border-color .3s, background .3s; }
+.arch-layer:hover { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.02); }
+.arch-layer-name { font-family: var(--font-d); font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+.arch-layer-desc { font-size: 14px; color: var(--grey-4); line-height: 1.65; }
+.arch-badge { display: inline-block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; background: rgba(255,255,255,.07); border-radius: 100px; padding: 3px 10px; color: var(--grey-3); margin-top: 6px; }
+
+/* PILLARS LARGE */
+.pillars-section { background: var(--grey-1); padding: 100px 56px; }
+.pillars-large { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 60px; }
+.pillar-large { background: var(--black); border: 1px solid rgba(255,255,255,.06); border-radius: 20px; padding: 52px 48px; transition: border-color .3s, box-shadow .3s; }
+.pillar-large:hover { border-color: rgba(255,255,255,.12); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.pillar-large-icon  { font-size: 32px; margin-bottom: 24px; }
+.pillar-large-title { font-family: var(--font-d); font-weight: 700; font-size: 24px; margin-bottom: 14px; letter-spacing: -.01em; }
+.pillar-large-body  { font-size: 15px; color: var(--grey-4); line-height: 1.8; }
+
+/* FAQ */
+.priv-faq { background: var(--black); padding: 100px 56px; }
+.priv-faq-inner { max-width: 780px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<div id="rocket-cursor"><svg viewBox="0 0 32 32" fill="none"><path d="M16 3 C16 3 22 8 22 16 L16 21 L10 16 C10 8 16 3 16 3Z" fill="#F5F5F0" opacity="0.95"/><circle cx="16" cy="13" r="2.5" fill="#080808" stroke="#F5F5F0" stroke-width="0.8"/><path d="M10 16 L7 21 L12 19Z" fill="#AAAAAA" opacity="0.8"/><path d="M22 16 L25 21 L20 19Z" fill="#AAAAAA" opacity="0.8"/><ellipse cx="16" cy="23" rx="2.5" ry="3.5" fill="rgba(255,255,255,0.25)" id="rocket-flame"/><ellipse cx="16" cy="24" rx="1.2" ry="2" fill="rgba(255,255,255,0.5)" id="rocket-flame2"/></svg></div>
+<div id="gravity-ring"></div><div id="gravity-ring2"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 100 100" fill="none"><circle cx="63" cy="33" r="9" fill="white"/><circle cx="28" cy="38" r="11" fill="white"/><circle cx="24" cy="68" r="10" fill="white"/><circle cx="58" cy="54" r="17" fill="white"/><line x1="47" y1="47" x2="36" y2="41" stroke="black" stroke-width="3.5" stroke-linecap="round"/><line x1="59" y1="37" x2="55" y2="45" stroke="black" stroke-width="3.5" stroke-linecap="round"/><line x1="42" y1="60" x2="33" y2="66" stroke="black" stroke-width="3.5" stroke-linecap="round"/></svg>
+    <span class="nav-logo-text">VESPER</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="engine.html">Engine</a></li>
+    <li><a href="privacy.html" class="active">Privacy</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="download.html">Download</a></li>
+  </ul>
+  <a href="download.html" class="nav-cta">Get Vesper</a>
+</nav>
+
+<div class="privacy-hero">
+  <div class="privacy-hero-bg">PRIVATE</div>
+  <div class="section-eyebrow center" style="position:relative;z-index:2;">Privacy Whitepaper</div>
+  <h1 class="privacy-hero-title">Privacy is<br>not a feature.<br><em>It is architecture.</em></h1>
+  <p class="privacy-hero-sub">Every design decision in Vesper was made with one constraint: zero exposure by default. No toggles. No settings. Just structural privacy.</p>
+  <div style="display:flex;gap:16px;justify-content:center;position:relative;z-index:2;">
+    <a href="download.html" class="btn-primary">Download Vesper →</a>
+    <a href="#architecture" class="btn-ghost">See the architecture →</a>
+  </div>
+</div>
+
+
+<div class="gb-dg"></div>
+
+<div class="manifesto">
+  <div class="reveal">
+    <div class="manifesto-label">Our Position</div>
+    <p class="manifesto-text">
+      <strong>Privacy tools are built wrong.</strong> They ask users to opt in, to enable, to configure. We believe that is a design failure.
+      <br><br>
+      <strong>True privacy</strong> means the system is structurally incapable of violating it — regardless of settings, updates, or user error.
+    </p>
+  </div>
+  <div class="manifesto-right reveal">
+    <div class="manifesto-point"><h4>No Data Minimization</h4><p>We don't minimize data collection. We eliminate it. There is no pipeline to minimize from.</p></div>
+    <div class="manifesto-point"><h4>No Privacy Mode</h4><p>There is no "private mode" in Vesper because all modes are private. It's the only mode that exists.</p></div>
+    <div class="manifesto-point"><h4>Verify Don't Trust</h4><p>The privacy engine is open source. Don't take our word for it — read the code, run it, audit it yourself.</p></div>
+  </div>
+</div>
+
+<div class="gb-gd"></div>
+
+<div class="arch-section" id="architecture">
+  <div class="section-eyebrow">Technical Architecture</div>
+  <h2 style="font-family:var(--font-d);font-weight:700;font-size:clamp(36px,4vw,58px);letter-spacing:-.025em;max-width:600px;line-height:1.08;">How we make it<br>structurally impossible<br>to violate your privacy.</h2>
+  <div class="arch-diagram reveal">
+    <div class="arch-layers">
+      <div class="arch-layer"><div><div class="arch-layer-name">User Interface</div><div class="arch-badge">Fully Local</div></div><div class="arch-layer-desc">All rendering and UI logic runs locally. No remote frames, no third-party scripts injected into browsing context.</div></div>
+      <div class="arch-layer"><div><div class="arch-layer-name">AI / Inference Layer</div><div class="arch-badge">On-Device Only</div></div><div class="arch-layer-desc">All LLM inference runs on local hardware via quantized models. No API calls to OpenAI, Anthropic, or any external AI provider.</div></div>
+      <div class="arch-layer"><div><div class="arch-layer-name">Network Layer</div><div class="arch-badge">No Telemetry</div></div><div class="arch-layer-desc">Vesper makes no background connections to our servers. Zero heartbeats, zero analytics pings, zero crash reporting (unless explicitly opted in).</div></div>
+      <div class="arch-layer"><div><div class="arch-layer-name">Storage Layer</div><div class="arch-badge">Local + E2E Encrypted</div></div><div class="arch-layer-desc">Browsing history, bookmarks, and session data live on your device. Cloud sync uses client-side AES-256 encryption — we hold no decryption keys.</div></div>
+      <div class="arch-layer"><div><div class="arch-layer-name">Update Mechanism</div><div class="arch-badge">Signed Binaries</div></div><div class="arch-layer-desc">Updates are cryptographically signed and verified locally. Update server receives no identifiable information during the check process.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="gb-dg"></div>
+
+<div class="pillars-section">
+  <div class="section-eyebrow">Four Guarantees</div>
+  <h2 style="font-family:var(--font-d);font-weight:700;font-size:clamp(36px,4vw,58px);letter-spacing:-.025em;line-height:1.08;">What we promise.<br>What you can verify.</h2>
+  <div class="pillars-large">
+    <div class="pillar-large reveal"><div class="pillar-large-icon">⬡</div><h3 class="pillar-large-title">On-Device Everything</h3><p class="pillar-large-body">Every computation — search indexing, AI inference, tab prediction, form autofill — happens on your hardware. We have no servers that receive your browsing data because no such infrastructure exists.</p></div>
+    <div class="pillar-large reveal"><div class="pillar-large-icon">◈</div><h3 class="pillar-large-title">Zero Log Architecture</h3><p class="pillar-large-body">Vesper maintains no logs of your browsing sessions on any external system. History stays local, encrypted at rest, and is never indexed or transmitted. Deleting it locally is final.</p></div>
+    <div class="pillar-large reveal"><div class="pillar-large-icon">◉</div><h3 class="pillar-large-title">Open Source Core</h3><p class="pillar-large-body">The privacy-critical components of Vesper — the network layer, telemetry system (or lack thereof), and sync encryption — are fully open source and available on GitHub. Audit them yourself.</p></div>
+    <div class="pillar-large reveal"><div class="pillar-large-icon">⬖</div><h3 class="pillar-large-title">E2E Encrypted Sync</h3><p class="pillar-large-body">If you use Vesper Sync, your data is encrypted on your device before it ever leaves. We use your passphrase-derived key. We store ciphertext only. A court order cannot help us decrypt your data.</p></div>
+  </div>
+</div>
+
+<div class="gb-gd"></div>
+
+<div class="priv-faq">
+  <div class="priv-faq-inner">
+    <div class="faq-header reveal"><div class="section-eyebrow center">Privacy FAQ</div><h2 class="faq-title">Hard questions.<br>Direct answers.</h2></div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">Can you access my browsing data?<div class="faq-toggle"><div class="faq-tl"></div></div></div><div class="faq-a">No. Architecturally, we cannot. No telemetry pipeline exists. Our servers never receive browsing session data. This is verifiable in the open source codebase.</div></div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">What happens if Vesper gets acquired?<div class="faq-toggle"><div class="faq-tl"></div></div></div><div class="faq-a">The privacy architecture is structural, not policy-based. An acquirer cannot retroactively add telemetry to existing installations. The open-source core is MIT licensed.</div></div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">How does AI work without sending data to OpenAI?<div class="faq-toggle"><div class="faq-tl"></div></div></div><div class="faq-a">Vesper ships with quantized local models (3B–7B parameters) optimized for Apple Silicon and modern x86. No external API calls are made for any AI feature.</div></div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">What if I lose my sync passphrase?<div class="faq-toggle"><div class="faq-tl"></div></div></div><div class="faq-a">Your data is unrecoverable if you lose the passphrase. This is by design. We cannot reset it because we do not hold it. Keep it somewhere safe.</div></div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">Is Vesper compliant with GDPR / CCPA?<div class="faq-toggle"><div class="faq-tl"></div></div></div><div class="faq-a">Vesper exceeds GDPR and CCPA requirements by collecting no personal data at all. There is nothing to delete, export, or rectify because we hold nothing.</div></div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="footer-logo"><svg width="26" height="26" viewBox="0 0 100 100" fill="none"><circle cx="63" cy="33" r="9" fill="white"/><circle cx="28" cy="38" r="11" fill="white"/><circle cx="24" cy="68" r="10" fill="white"/><circle cx="58" cy="54" r="17" fill="white"/><line x1="47" y1="47" x2="36" y2="41" stroke="black" stroke-width="3.5" stroke-linecap="round"/><line x1="59" y1="37" x2="55" y2="45" stroke="black" stroke-width="3.5" stroke-linecap="round"/><line x1="42" y1="60" x2="33" y2="66" stroke="black" stroke-width="3.5" stroke-linecap="round"/></svg><span class="footer-logo-text">VESPER</span></div><p class="footer-tagline">The autonomous browser for people who think faster than they can click.</p></div>
+  <div><div class="footer-col-title">Product</div><ul class="footer-links"><li><a href="download.html">Download</a></li><li><a href="engine.html">Engine</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
+  <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li></ul></div>
+  <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li><li><a href="#">Open Source</a></li></ul></div>
+</footer>
+<div class="footer-bottom"><span>© 2026 Vesper Inc.</span><span>Zero data. Zero compromise.</span></div>
+
+<script src="../js/shared.js"></script>
+<script>
+initMarquee(['Zero Telemetry','On-Device AI','Open Source','E2E Encrypted','No Logs','Local Only','Verified','Auditable','GDPR+','Private by Design']);
+</script>
+</body>
+</html>
