@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guides — Categories — VESPER</title>
+<meta name="description" content="In-depth written guides on high-leverage topics." />
+<link rel="canonical" href="https://getvesper.in/category/guides" />
+<link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="../assets/favicon/site.webmanifest" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<div id="site-navbar"></div>
+
+<div class="container">
+  <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="../categories.html">Categories</a> / Guides</p>
+  <section class="page-hero">
+    <span class="eyebrow">VESPER / Category</span>
+    <h1>Guides</h1>
+    <p>In-depth written guides on high-leverage topics.</p>
+  </section>
+
+  <div class="grid" id="products-grid" style="padding-bottom: 100px;"></div>
+  <div class="empty-state" id="empty-state" style="display:none;">
+    <span class="eyebrow">No products yet</span>
+    <p>This category doesn't have any products yet — check back soon or browse the full catalog.</p>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  injectLayout("categories");
+</script>
+<script>
+  const items = getProductsByCategory("guides");
+  const grid = document.getElementById("products-grid");
+  const empty = document.getElementById("empty-state");
+  if (items.length === 0) {
+    empty.style.display = "block";
+  } else {
+    grid.innerHTML = items.map(p => productCardHTML(p, "../")).join("");
+  }
+</script>
+</body>
+</html>

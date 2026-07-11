@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Ops Guide — VESPER</title>
+<meta name="description" content="How to run internal operations using AI agents instead of manual busywork." />
+<link rel="canonical" href="https://getvesper.in/product/ai-ops-guide" />
+<link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="../assets/favicon/site.webmanifest" />
+<meta property="og:title" content="AI Ops Guide — VESPER" />
+<meta property="og:description" content="How to run internal operations using AI agents instead of manual busywork." />
+<meta property="og:image" content="../assets/og/og-product-default.jpg" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<div id="site-navbar"></div>
+
+<div class="container">
+  <p class="breadcrumb" id="breadcrumb"></p>
+
+  <!-- Top hero section -->
+  <section class="product-hero">
+    <div class="product-cover">
+      <span class="mono-mark" id="cover-mark">VESPER</span>
+    </div>
+    <div class="product-info">
+      <span class="eyebrow" id="cat-label"></span>
+      <h1 id="p-title"></h1>
+      <p class="short-desc" id="p-shortdesc"></p>
+
+      <div class="product-price-row">
+        <span class="price-tag" id="p-price"></span>
+      </div>
+
+      <div class="product-buy-box" id="buy">
+        <button class="btn btn-primary btn-block" id="buy-btn">Get Instant Access →</button>
+        <div class="trust-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Instant digital access</span>
+        </div>
+        <div class="trust-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Secure external checkout</span>
+        </div>
+        <div class="trust-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Download available after purchase</span>
+        </div>
+      </div>
+      <p class="redirect-note">You'll be redirected to our secure checkout partner to complete your purchase.</p>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+  <!-- Section 3: What's included -->
+  <section class="section">
+    <div class="section-head"><h2>What's Included</h2></div>
+    <div class="included-grid" id="included-grid"></div>
+  </section>
+</div>
+
+<div class="container">
+  <!-- Section 4: Long description -->
+  <section class="section">
+    <div class="section-head"><h2>About This Product</h2></div>
+    <div class="prose">
+      <p id="p-longdesc"></p>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+  <!-- Section 5: Problem it solves -->
+  <section class="section">
+    <div class="section-head"><h2>The Problem It Solves</h2></div>
+    <div class="problem-grid" id="problem-grid"></div>
+  </section>
+</div>
+
+<div class="container">
+  <!-- Section 6: FAQ -->
+  <section class="section">
+    <div class="section-head"><h2>FAQ</h2></div>
+    <div class="faq-list" id="faq-list"></div>
+  </section>
+</div>
+
+<div class="container">
+  <!-- Section 7: Related products -->
+  <section class="section">
+    <div class="section-head"><h2>Related Products</h2></div>
+    <div class="grid" id="related-grid"></div>
+  </section>
+</div>
+
+<div class="container">
+  <!-- Section 8: Related products strip near footer -->
+  <section class="section" style="border-top:none; padding-top:0;">
+    <div class="section-head"><h2>You Might Also Like</h2></div>
+    <div id="related-strip"></div>
+    <a href="#buy" class="btn btn-primary btn-block" style="margin-top:20px;" onclick="document.getElementById('buy-btn').click(); return false;">Get Instant Access →</a>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  injectLayout("products", { href: "#buy", label: "Buy Now" });
+</script>
+<script>
+  const product = getProductBySlug("ai-ops-guide");
+
+  document.getElementById("breadcrumb").innerHTML =
+    `<a href="../index.html">Home</a> / <a href="../products.html">Products</a> / ${product.title}`;
+  document.getElementById("cover-mark").textContent = "VESPER / " + product.slug.slice(0,8).toUpperCase();
+  document.getElementById("cat-label").textContent = getCategoryBySlug(product.category)?.name || product.category;
+  document.getElementById("p-title").textContent = product.title;
+  document.getElementById("p-shortdesc").textContent = product.shortDescription;
+  document.getElementById("p-price").textContent = "$" + product.price.toFixed(2);
+  document.getElementById("p-longdesc").textContent = product.longDescription;
+
+  document.getElementById("buy-btn").addEventListener("click", () => goToCheckout(product.checkoutLink));
+
+  document.getElementById("included-grid").innerHTML = product.included.map(item => `
+    <div class="included-item"><span class="check">✓</span><span>${item}</span></div>
+  `).join("");
+
+  document.getElementById("problem-grid").innerHTML = product.problemSolves.map((p, i) => `
+    <div class="problem-item">
+      <span class="eyebrow">0${i+1}</span>
+      <p>${p}</p>
+    </div>
+  `).join("");
+
+  document.getElementById("faq-list").innerHTML = product.faq.map(f => `
+    <div class="faq-item">
+      <button class="faq-q"><span>${f.q}</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>${f.a}</p></div>
+    </div>
+  `).join("");
+  initFaqAccordion();
+
+  const related = getRelatedProducts(product, 4);
+  document.getElementById("related-grid").innerHTML = related.map(p => productCardHTML(p, "../")).join("");
+  document.getElementById("related-strip").innerHTML = related.slice(0,3).map(p => relatedStripItemHTML(p, "../")).join("");
+
+  document.title = product.title + " — VESPER";
+</script>
+</body>
+</html>

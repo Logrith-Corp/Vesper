@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Categories — VESPER</title>
+<meta name="description" content="Browse VESPER digital products by category — AI, business, startups, productivity, templates, prompts, guides, and bundles." />
+<link rel="canonical" href="https://getvesper.in/categories" />
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="assets/favicon/site.webmanifest" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="site-navbar"></div>
+
+<div class="container">
+  <p class="breadcrumb"><a href="index.html">Home</a> / Categories</p>
+  <section class="page-hero">
+    <span class="eyebrow">VESPER / Browse by Category</span>
+    <h1>Categories</h1>
+    <p>Every product in the VESPER catalog is organized into one of these categories.</p>
+  </section>
+
+  <div class="cat-grid" id="category-grid" style="padding-bottom: 100px;"></div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/app.js"></script>
+<script>
+  injectLayout("categories");
+</script>
+<script>
+  document.getElementById("category-grid").innerHTML = CATEGORIES.map(c => `
+    <a class="cat-card" href="category/${c.slug}.html">
+      <span class="eyebrow">${getProductsByCategory(c.slug).length} products</span>
+      <h3>${c.name}</h3>
+      <p>${c.description}</p>
+    </a>`).join("");
+</script>
+</body>
+</html>

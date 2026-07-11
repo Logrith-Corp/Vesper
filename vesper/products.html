@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>All Products — VESPER</title>
+<meta name="description" content="Browse all VESPER digital products — playbooks, templates, prompts, and startup kits." />
+<link rel="canonical" href="https://getvesper.in/products" />
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="assets/favicon/site.webmanifest" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="site-navbar"></div>
+
+<div class="container">
+  <p class="breadcrumb"><a href="index.html">Home</a> / Products</p>
+  <section class="page-hero">
+    <span class="eyebrow">VESPER / Full Catalog</span>
+    <h1>All Products</h1>
+    <p>Every playbook, template, and prompt pack in the VESPER catalog — filter by category or search directly.</p>
+  </section>
+
+  <div class="filters-bar">
+    <div class="search-input-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="Search products…" />
+    </div>
+    <div class="select-wrap">
+      <select id="sort">
+        <option value="default">Sort: Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name-asc">Name: A–Z</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="chip-row" id="chip-row"></div>
+
+  <div class="grid" id="products-grid" style="padding-bottom: 90px;"></div>
+  <div class="empty-state" id="empty-state" style="display:none;">
+    <span class="eyebrow">No results</span>
+    <p>Nothing matches that search or filter — try a different keyword or category.</p>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/app.js"></script>
+<script>
+  injectLayout("products");
+</script>
+<script>
+  let activeCategory = "all";
+
+  function renderChips() {
+    const chips = [{ slug: "all", name: "All" }, ...CATEGORIES];
+    document.getElementById("chip-row").innerHTML = chips.map(c => `
+      <button class="chip ${c.slug === activeCategory ? 'active' : ''}" data-slug="${c.slug}">${c.name}</button>
+    `).join("");
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        activeCategory = chip.dataset.slug;
+        renderChips();
+        renderGrid();
+      });
+    });
+  }
+
+  function renderGrid() {
+    const query = document.getElementById("search").value.trim().toLowerCase();
+    const sort = document.getElementById("sort").value;
+    let list = PRODUCTS.filter(p => activeCategory === "all" || p.category === activeCategory);
+    if (query) {
+      list = list.filter(p => p.title.toLowerCase().includes(query) || p.shortDescription.toLowerCase().includes(query));
+    }
+    if (sort === "price-asc") list = [...list].sort((a,b) => a.price - b.price);
+    if (sort === "price-desc") list = [...list].sort((a,b) => b.price - a.price);
+    if (sort === "name-asc") list = [...list].sort((a,b) => a.title.localeCompare(b.title));
+
+    const grid = document.getElementById("products-grid");
+    const empty = document.getElementById("empty-state");
+    if (list.length === 0) {
+      grid.innerHTML = "";
+      empty.style.display = "block";
+    } else {
+      empty.style.display = "none";
+      grid.innerHTML = list.map(p => productCardHTML(p)).join("");
+    }
+  }
+
+  document.getElementById("search").addEventListener("input", renderGrid);
+  document.getElementById("sort").addEventListener("change", renderGrid);
+
+  renderChips();
+  renderGrid();
+</script>
+</body>
+</html>
